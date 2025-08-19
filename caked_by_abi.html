@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta tags and page title -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CAKED by Abi</title>
+  
+  <!-- Font imports -->
+<link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main CSS styles -->
+  <style>
+    /* Add smooth scrolling to the entire page */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Enhanced Lightbox styles for zoomable images */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+      z-index: 3000;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 50vw;
+      max-height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+    }
+
+    .lightbox.active .lightbox-content {
+      transform: scale(1);
+    }
+
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 15px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -70px;
+      right: -70px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #ffe5e9, #ffd2e4);
+      border: 2px solid #d97d8f;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 24px;
+      font-weight: bold;
+      color: #d97d8f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(217, 125, 143, 0.4);
+      z-index: 3001;
+    }
+
+    .lightbox-close:hover {
+      background: linear-gradient(135deg, #d97d8f, #c76a7f);
+      color: white;
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(217, 125, 143, 0.6);
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #ffe5e9, #ffd2e4);
+      border: 2px solid #d97d8f;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 24px;
+      font-weight: bold;
+      color: #d97d8f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(217, 125, 143, 0.4);
+      z-index: 3001;
+    }
+
+    .lightbox-nav:hover {
+      background: linear-gradient(135deg, #d97d8f, #c76a7f);
+      color: white;
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 8px 25px rgba(217, 125, 143, 0.6);
+    }
+
+    .lightbox-prev {
+      left: -90px;
+    }
+
+    .lightbox-next {
+      right: -90px;
+    }
+
+    .lightbox-counter {
+      position: absolute;
+      bottom: -70px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #ffe5e9, #ffd2e4);
+      border: 2px solid #d97d8f;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      color: #d97d8f;
+      font-size: 16px;
+      box-shadow: 0 4px 15px rgba(217, 125, 143, 0.4);
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: -110px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #ffe5e9, #ffd2e4);
+      border: 2px solid #d97d8f;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-family: 'Chewy', cursive;
+      font-weight: 400;
+      color: #d97d8f;
+      font-size: 18px;
+      box-shadow: 0 4px 15px rgba(217, 125, 143, 0.4);
+      white-space: nowrap;
+    }
+
+    /* Make order images clickable */
+    .order-image {
+      cursor: pointer;
+    }
+
+    .order-image img {
+      transition: all 0.3s ease;
+    }
+
+    .order-image:hover img {
+      transform: scale(1.05);
+      filter: drop-shadow(0 15px 35px rgba(217, 125, 143, 0.6));
+    }
+
+    /* Gallery item cursor change */
+    .gallery-item {
+      cursor: pointer;
+    }
+
+    /* Responsive lightbox adjustments */
+    @media (max-width: 768px) {
+      .lightbox-content {
+        max-width: 95vw;
+        max-height: 80vh;
+      }
+      
+      .lightbox-close {
+        top: -50px;
+        right: -50px;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+      }
+      
+      .lightbox-nav {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+      
+      .lightbox-prev {
+        left: -70px;
+      }
+      
+      .lightbox-next {
+        right: -70px;
+      }
+      
+      .lightbox-counter {
+        bottom: -60px;
+        padding: 10px 16px;
+        font-size: 14px;
+      }
+
+      .lightbox-caption {
+        bottom: -100px;
+        padding: 6px 12px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .lightbox-content {
+        max-width: 98vw;
+        max-height: 75vh;
+      }
+      
+      .lightbox-close {
+        top: -40px;
+        right: -40px;
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+      }
+      
+      .lightbox-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+      
+      .lightbox-prev {
+        left: -55px;
+      }
+      
+      .lightbox-next {
+        right: -55px;
+      }
+      
+      .lightbox-counter {
+        bottom: -55px;
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      .lightbox-caption {
+        bottom: -90px;
+        padding: 5px 10px;
+        font-size: 14px;
+      }
+    }
+
+    .chewy-text {
+      font-family: 'Chewy', cursive;
+      font-weight: 400 !important;
+    }
+    :root {
+      --primary-pink: #ffd2e4;
+      --accent-pink: #d97d8f;
+      --text-dark: #2e2e2e;
+      --text-light: #ffffff;
+      --title-color: #ffe5e9;
+      --blush-pink: #ffe5e9;
+      --bubblegum-pink: #ffd2e4;
+      --darker-blush: rgba(255, 229, 233, 0.7);
+      --coral-pink: #eca1a2;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--text-dark);
+      background-color: var(--primary-pink);
+    }
+
+    body, p, a, .text-wrapper {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+
+   header {
+      position: fixed;
+      top: 20px;
+      width: 100%;
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+      padding: 1rem 2rem;
+      z-index: 2000;
+      pointer-events: none;
+    }
+
+    header nav {
+      pointer-events: auto;
+      position: relative;
+    }
+
+    header nav::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -40px;
+      right: -40px;
+      bottom: -20px;
+      background: rgba(255, 229, 233, 0.5);
+      border-radius: 50px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 15px 40px rgba(217, 125, 143, 0.3);
+      z-index: -1;
+      animation: bubbleFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes bubbleFloat {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-5px) scale(1.02); }
+    }
+
+    header nav a {
+      display: inline-block;
+      margin: 0 1.2rem;
+      text-decoration: none;
+      font-weight: 400;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.4rem;
+      background-color: #ffe5e9;
+      color: #d97d8f;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      text-shadow: 3px 3px 8px rgba(217, 125, 143, 0.6);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(217, 125, 143, 0.3);
+      animation: bubbleFloat 4s ease-in-out infinite;
+    }
+
+    header nav a:hover {
+      background-color: #d97d8f;
+      color: #ffffff;
+      transform: scale(1.1) translateY(-2px);
+      box-shadow: 0 8px 25px rgba(217, 125, 143, 0.5);
+    }
+
+    section {
+      padding: 100px 20px 60px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    #bookings {
+      background-color: var(--accent-pink);
+      color: var(--text-light);
+      padding: 100px 20px 60px;
+      text-align: center;
+    }
+
+    section {
+      margin-bottom: 0px;
+    }
+
+    #orders h2,
+    #orders p {
+      color: var(--text-light);
+    }
+    #orders {
+      background-image: url('caked3.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: var(--accent-pink);
+      color: var(--text-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 20px 60px;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      max-width: none;
+      text-align: center;
+    }
+
+    #orders h2,
+    #orders p {
+      color: var(--text-light);
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    #orders .button {
+      margin: 0 auto;
+      display: inline-block;
+      text-align: center;
+    }
+
+    /* New styles for the order images */
+    .order-images-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      width: 90%;
+      margin: 0 auto 3rem;
+      gap: 2rem;
+      position: relative;
+    }
+
+    .order-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+/*pricingblobs*/
+    .order-image img {
+      max-width: 100%;
+      height: auto;
+      filter: drop-shadow(0 8px 25px rgba(217, 125, 143, 0.4));
+    }
+
+    .order-image:first-child img {
+      animation-delay: -1s;
+    }
+
+    .order-image:last-child img {
+      animation-delay: -3s;
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% {
+        transform: translateY(0px) scale(1);
+      }
+      50% {
+        transform: translateY(-10px) scale(1.02);
+      }
+    }
+
+    .order-image img:hover {
+      transform: scale(1.05) translateY(-5px);
+      filter: drop-shadow(0 15px 35px rgba(217, 125, 143, 0.6));
+    }
+
+    /* Responsive design for order images */
+    @media (max-width: 768px) {
+      .order-images-container {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .order-image img {
+        max-width: 80%;
+      }
+    }
+
+    .policy-box {
+      padding: 1.5rem 2rem;
+      border-radius: 25px;
+      max-width: 900px;
+      width: 90%;
+      margin: 0 auto 2rem;
+      transition: all 0.6s ease;
+    }
+
+    .policy-box.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .policy-box h3 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 2.5rem;
+      color: transparent;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      height: 3rem;
+    }
+
+    .policy-section {
+      margin-bottom: 2.5rem;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .policy-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .policy-subtopic {
+      font-family: 'Chewy', cursive;
+      font-size: 1.8rem;
+      color: transparent;
+      padding: 1.2rem 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      z-index: 2;
+      transform: rotate(0deg);
+      height: 4rem;
+    }
+
+    .policy-subtopic::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      z-index: -1;
+      transform: scale(1.275);
+    }
+
+    .subtopic-blob-1::before {
+      background-image: url('blob2.png');
+    }
+
+    .subtopic-blob-2::before {
+      background-image: url('blob3.png');
+    }
+
+    .subtopic-blob-3::before {
+      background-image: url('blob4.png');
+    }
+
+    .subtopic-blob-4::before {
+      background-image: url('blob5.png');
+    }
+
+    .subtopic-blob-5::before {
+      background-image: url('blob6.png');
+    }
+
+    .policy-details {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 1rem 1.2rem;
+      color: #d97d8f;
+      box-shadow: 0 8px 32px rgba(217, 125, 143, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .policy-details ul {
+      list-style: none;
+      padding-left: 0;
+      margin-left: 0;
+    }
+
+    .policy-details li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.6rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      color: #d97d8f;
+      text-align: left;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .policy-details li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #d97d8f;
+      font-size: 1.2rem;
+      line-height: 1.1;
+      font-weight: bold;
+    }
+
+    .booking-text-wrapper {
+      position: relative;
+      padding: 4rem 3rem;
+      margin: 1rem auto;
+      max-width: 1200px;
+      width: 90%;
+      border: none;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+    }
+
+    .booking-text-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 112.5%;
+      height: 112.5%;
+      transform: translate(-50%, -50%);
+      background-image: url('orderblob.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      z-index: 0;
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: block !important;
+    }
+
+    .booking-text-wrapper > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .booking-text-wrapper h2 {
+      font-family: 'Poppins', sans-serif; 
+      font-weight: 600; 
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      color: transparent;
+      text-align: center;
+      height: 3rem;
+    }
+
+    .booking-text-wrapper p {
+      font-size: 1.25rem;
+      max-width: 800px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6; 
+      color: #ffffff;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 4.875rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .faq-container {
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .faq-title {
+      font-family: 'Chewy', cursive;
+      font-weight: 400;
+      font-size: 3rem;
+      color: transparent;
+      margin-bottom: 4rem;
+      text-align: center;
+      height: 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .faq-title::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 540px;
+      height: 270px;
+      background-image: url('blob8.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      z-index: -1;
+    }
+
+    .faq-item {
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .faq-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .faq-question {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #d97d8f;
+      margin-bottom: 0.75rem;
+      text-align: center;
+      padding: 1rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      position: relative;
+      user-select: none;
+    }
+
+    .faq-question:hover {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.8));
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(217, 125, 143, 0.3);
+    }
+
+    .faq-answer {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 1.5rem 2rem;
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: #d97d8f;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(217, 125, 143, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    .faq-answer.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .faq-answer::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 229, 233, 0.2) 0%, rgba(217, 125, 143, 0.1) 50%, transparent 70%);
+      animation: bubble-float 6s ease-in-out infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    #faqs {
+      background-image: url('caked3.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 100px 20px 60px;
+      max-width: none;
+      min-height: 100vh;
+    }
+
+    .faq-container {
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+
+    @media (max-width: 768px) {
+      .faq-title {
+        font-size: 2.5rem;
+      }
+      
+      .faq-question {
+        font-size: 1.3rem;
+      }
+      
+      .faq-container {
+        padding: 2rem 1rem;
+      }
+    }
+
+    #socials {
+      background-image: url('caked4.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 100px 20px 120px;
+      max-width: none;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    #socials::before {
+      content: '';
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      width: 756px;
+      height: 756px;
+      transform: translate(-50%, -50%);
+      background-image: url('socials.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      animation: blobPulse 4s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    @keyframes blobPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.05); }
+    }
+
+    .socials-container {
+      padding: 3rem 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .socials-title {
+      font-family: 'Chewy', cursive;
+      font-size: 3rem;
+      color: transparent;
+      margin-bottom: 3rem;
+      text-align: center;
+      height: 3rem;
+    }
+
+    .social-platform {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 233, 239, 0.8);
+      backdrop-filter: blur(15px);
+      border-radius: 25px;
+      padding: 2rem 3rem;
+      margin: 2rem 0;
+      box-shadow: 0 12px 40px rgba(217, 125, 143, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      transform: translateY(50px) scale(0.9);
+      animation: socialPop 0.8s ease forwards;
+    }
+
+    .social-platform:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .social-platform:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .social-platform:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+
+    .social-platform:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 60px rgba(217, 125, 143, 0.5);
+      background: rgba(255, 233, 239, 0.9);
+    }
+
+    @keyframes socialPop {
+      0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9) rotate(-3deg);
+      }
+      60% {
+        transform: translateY(-10px) scale(1.05) rotate(1deg);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+      }
+    }
+
+    .social-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .social-platform:hover .social-logo {
+      transform: rotate(360deg) scale(1.1);
+    }
+
+    .social-handle {
+      flex: 1;
+      text-align: center;
+      margin: 0 2rem;
+    }
+
+    .social-handle a {
+      font-family: 'Chewy', cursive;
+      font-size: 2rem;
+      color: #d97d8f;
+      text-decoration: none;
+      text-shadow: 1px 1px 3px rgba(217, 125, 143, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .social-handle a:hover {
+      color: #c76a7f;
+      transform: scale(1.05);
+      text-shadow: 2px 2px 8px rgba(217, 125, 143, 0.5);
+    }
+
+    .social-handle a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 50%;
+      background: linear-gradient(90deg, #d97d8f, #ffe5e9);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .social-handle a:hover::after {
+      width: 100%;
+    }
+
+    .follow-button {
+      background: linear-gradient(135deg, #b86574, #d97d8f);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 20px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(184, 101, 116, 0.4);
+    }
+
+    .follow-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(184, 101, 116, 0.5);
+      background: linear-gradient(135deg, #d97d8f, #b86574);
+    }
+
+    @keyframes slideUpSocials {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #gallery {
+      background-image: url('caked3.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 140px 40px 60px;
+      max-width: none;
+      min-height: 100vh;
+    }
+
+    .gallery-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .gallery-title {
+      font-family: 'Chewy', cursive;
+      font-weight: 400;
+      font-size: 3rem;
+      color: transparent;
+      text-align: center;
+      margin-bottom: 5rem;
+      height: 4rem;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gallery-title::before {
+      content: '';
+      position: absolute;
+      width: 360px;
+      height: 240px;
+      background-image: url('galleryblob.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      z-index: 1;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      padding: 20px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    .gallery-row {
+      display: contents;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      border-radius: 15px;
+      overflow: hidden;
+      border: 3px solid #d97d8f;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 1;
+      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 15px rgba(217, 125, 143, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Nunito', sans-serif;
+      color: #d97d8f;
+      font-size: 0.9rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.1) translateY(-5px);
+      border-color: #c76a7f;
+      box-shadow: 0 8px 25px rgba(199, 106, 127, 0.5);
+      z-index: 10;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      filter: brightness(0.8) contrast(1.1);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(217, 125, 143, 0.9);
+      color: white;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-caption {
+      opacity: 1;
+    }
+
+    .gallery-wrapper {
+      overflow: visible;
+      height: auto;
+      max-height: none;
+    }
+
+    html, body {
+      height: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #welcome {
+      background-image: url('caked1.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      text-align: center;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 0;
+      max-width: none;
+      overflow: hidden;
+    }
+
+    #welcome::before {
+      content: '';
+      position: absolute;
+      top: -5%;
+      left: 0;
+      right: 0;
+      bottom: -5%;
+      background-image: url('caked1.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      animation: gentleVerticalFloat 6s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes gentleVerticalFloat {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    #welcome h1 {
+      font-family: 'Chewy', cursive;
+      font-weight: 400;
+      font-size: 4rem;
+      color: var(--text-light);
+      text-shadow: 2px 2px 6px #d97d8f;
+    }
+
+    #about {
+      display: flex;
+      align-items: center;
+      background-image: url('caked3.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: var(--primary-pink);
+      position: relative;
+      width: 100vw;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 0;
+      max-width: none;
+      min-height: 100vh;
+    }
+
+    #about .image {
+      flex: 1.25;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 40px;
+      position: relative;
+      transform: translateX(-50px); /* Shift image left */
+    }
+
+    #about .image::before {
+      display: none;
+    }
+    
+
+    #about .image img {
+      height: 100vh;
+      width: auto;
+      object-fit: cover;
+      display: block;
+      border-radius: 30px;
+      border: 5px solid #eca1a2;
+      box-shadow:
+        0 0 40px 10px rgba(255, 255, 255, 0.9),
+        0 15px 40px rgba(217, 125, 143, 0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    #about .content {
+      flex: 1;
+      padding: 100px 60px 60px 40px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      position: relative;
+      transform: translateX(-50px); /* Shift content left */
+    }
+
+    #about .content::before {
+      content: '';
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      width: 765px;
+      height: 765px;
+      transform: translate(-50%, -50%);
+      background-image: url('blob1.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      z-index: 1;
+    }
+
+    .text-wrapper {
+      position: relative;
+      z-index: 2;
+      padding: 2.5rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    #about p,
+    p,
+    a {
+      text-shadow: none !important;
+    }
+
+    #about h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 3.0rem;
+      margin-bottom: 1rem;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .letter {
+      display: inline-block;
+      opacity: 0;
+      transform: translateX(100px) rotate(15deg);
+      animation: slideInTilted 0.8s ease forwards;
+    }
+
+    .letter:nth-child(1) { animation-delay: 0.1s; }
+    .letter:nth-child(2) { animation-delay: 0.15s; }
+    .letter:nth-child(3) { animation-delay: 0.2s; }
+    .letter:nth-child(4) { animation-delay: 0.25s; }
+    .letter:nth-child(5) { animation-delay: 0.3s; }
+    .letter:nth-child(6) { animation-delay: 0.35s; }
+    .letter:nth-child(7) { animation-delay: 0.4s; }
+    .letter:nth-child(8) { animation-delay: 0.45s; }
+    .letter:nth-child(9) { animation-delay: 0.5s; }
+
+    @keyframes slideInTilted {
+      to {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+      }
+    }
+
+    #about p {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      color: #ffffff;
+      max-width: 450px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .cake-it-text {
+      font-size: 1.3rem;
+    }
+
+    .button {
+      background-color: #ffe5e9;
+      color: #d97d8f;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 25px;
+      font-family: 'Chewy', cursive;
+      font-weight: 500;
+      font-size: 1.65rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      max-width: 300px;
+      box-shadow: 0 4px 15px rgba(217, 125, 143, 0.3);
+      animation: pulseButton 2s ease-in-out infinite;
+      -webkit-text-stroke: 1px #d97d8f;
+      text-shadow: 1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
+    }
+
+    .button::before {
+      display: none;
+    }
+
+    .button:hover {
+      background-color: #d97d8f;
+      color: #ffffff;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(217, 125, 143, 0.4);
+    }
+
+    #about .button {
+      background-color: #ffe5e9;
+      color: #d97d8f;
+      animation: pulseButton 2s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(255, 182, 193, 0.8), 0 4px 15px rgba(217, 125, 143, 0.3);
+    }
+
+    #about .button:hover {
+      background-color: #d97d8f;
+      color: #ffffff;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(217, 125, 143, 0.4);
+    }
+
+    #orders .button {
+      background-color: #ffe5e9;
+      color: #d97d8f;
+      font-size: 1.65rem;
+      animation: pulseButton 2s ease-in-out infinite;
+      box-shadow: 0 4px 15px rgba(217, 125, 143, 0.3);
+      flex: 1;
+      max-width: 200px;
+    }
+
+    #orders .button:hover {
+      background-color: #d97d8f;
+      color: #ffffff;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(217, 125, 143, 0.4);
+    }
+
+    .instagram-dm-button {
+      background-color: #ffe5e9;
+      color: #d97d8f;
+      font-size: 1.65rem;
+      animation: pulseButton 2s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 4px 15px rgba(217, 125, 143, 0.3);
+      flex: 1;
+      max-width: 200px;
+      text-align: left; /* Changed from center to left */
+      padding-left: 1.5rem; /* Add left padding to shift text */
+    }
+
+    .instagram-dm-button:hover {
+      background-color: #d97d8f;
+      color: #ffffff;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(217, 125, 143, 0.4);
+    }
+
+    .google-form-button {
+      background-color: #ffe5e9;
+      color: #d97d8f;
+      font-size: 1.65rem;
+      animation: pulseButton 2s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 4px 15px rgba(217, 125, 143, 0.3);
+      flex: 1;
+      max-width: 200px;
+    }
+
+    .google-form-button:hover {
+      background-color: #d97d8f;
+      color: #ffffff;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(217, 125, 143, 0.4);
+    }
+
+    @keyframes pulseButton {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    #faqs h2, #socials h2, #gallery h2, #orders h2 {
+      font-family: 'Chewy', cursive;
+      font-weight: 500;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      -webkit-text-stroke: 2px #d97d8f;
+      text-stroke: 2px #d97d8f;
+    }
+
+    @media (max-width: 1200px) {
+      .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .button-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Welcome Section -->
+  <section id="welcome">
+  </section>
+
+  <!-- Fixed header navigation -->
+  <header>
+    <nav>
+      <a href="#welcome">Welcome</a>
+      <a href="#about">About</a>
+      <a href="#orders">Orders</a>
+      <a href="#faqs">FAQs</a>
+      <a href="#socials">Socials</a>
+      <a href="#gallery">Gallery</a>
+    </nav>
+  </header>
+
+   <!-- About section with image and content -->
+  <section id="about">
+  <div class="image">
+    <img src="abipic.jpg" alt="Abi">
+  </div>
+  <div class="content">
+    <div class="text-wrapper">
+      <h2 id="meetAbiTitle"> </h2>
+      <p>
+       ~ The heart (and hands!) behind CAKED ~ <br><br> I started this at-home baking business with a love for creativity, community, and cake. I'm turning my lifelong passion into custom creations that are just as special as the moments they're made for.<br><br>
+        At CAKED, I believe beautiful, delicious cakes shouldn't break the bank. That's why I focus on making custom cakes that are both affordable and made with care. Giving is at the heart of everything I do, and I'm excited to bring a little more joy one cake at a time.<br><br>
+        <span class="cake-it-text">You name it and I cake it!</span>
+      </p>
+      <a class="button" href="#orders">Order with Abi</a>
+    </div>
+  </div>
+</section>
+
+<!-- Orders Section -->
+<section id="orders" id="bookings">
+ <!-- New image container at the top -->
+ <div class="order-images-container">
+   <div class="order-image" onclick="openLightbox('cakepricingblob.png', 'Cake Pricing')">
+     <img src="cakepricingblob.png" alt="Cake">
+   </div>
+   <div class="order-image" onclick="openLightbox('dessertbarblob.png', 'Dessert Bar Pricing')">
+     <img src="dessertbarblob.png" alt="Dessert Bar">
+   </div>
+ </div>
+
+ <div class="policy-box">
+  <h3> </h3>
+  
+  <div class="policy-section">
+    <div class="policy-subtopic subtopic-blob-1"> </div>
+    <div class="policy-details">
+      <ul>
+        <li>DM me or fill out my order form to start your request</li>
+        <li>Include all the cake details: flavor, filling, size, color, message, etc.</li>
+        <li>Inspiration pics help, but I'm always happy to get creative too!</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <div class="policy-subtopic subtopic-blob-2"> </div>
+    <div class="policy-details">
+      <ul>
+        <li>A $5 deposit is needed to secure your order</li>
+        <li>Venmo, Zelle, Apple Pay, and cash accepted</li>
+        <li>Remaining balance due at pickup</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <div class="policy-subtopic subtopic-blob-3"> </div>
+    <div class="policy-details">
+      <ul>
+        <li>I prefer at least 1–2 weeks' notice</li>
+        <li>Short notice? Just message me—we'll see what's possible!</li>
+        <li>More time = better planning and better cake</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <div class="policy-subtopic subtopic-blob-4"> </div>
+    <div class="policy-details">
+      <ul>
+        <li>Life happens - I get it!</li>
+        <li>Please cancel or change your order at least 24 hours before pickup</li>
+        <li>Want to change the flavor or design? Just send me a message</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <div class="policy-subtopic subtopic-blob-5"> </div>
+    <div class="policy-details">
+      <ul>
+        <li>Pickup only at Union on San Antonio</li>
+        <li>We'll schedule a pickup window at my apartment</li>
+        <li>I'll send you the exact room number day-of</li>
+        <li>Cakes come boxed, bagged, and ready to travel safely!</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="booking-text-wrapper">
+    <h2> </h2>
+    <p>
+      Ready for a custom cake? You can place your order through Instagram DM or by filling out my Google Form. 
+      Both options make it easy to share all your cake details and get the process started!
+    </p>
+    <div class="button-container">
+      <a class="button instagram-dm-button" href="https://instagram.com/CAKED_by_Abi" target="_blank">
+      Instagram DM  
+      </a>
+      <a class="button google-form-button" href="https://docs.google.com/forms/d/e/1FAIpQLScZPjx304tQGZ643l4KcuCbtU5xhCHx7JBAUhufM1Lkxt6GAw/viewform?usp=header" target="_blank">
+        Google Form
+      </a>
+    </div>
+</div>
+</section>
+
+<section id="faqs">
+  <div class="faq-container">
+    <h1 class="faq-title"> </h1>
+
+    <div class="faq-item">
+      <div class="faq-question"><strong>Where are you located?</strong></div>
+      <div class="faq-answer">
+        During the school year: <span class="bold">📍 UT Austin</span><br>
+        On breaks & summer: <span class="bold">📍Dallas, TX</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><strong>How do I place an order?</strong></div>
+      <div class="faq-answer">
+        You can <span class="bold">DM me on Instagram</span> or fill out the <span class="bold">Google Form linked in my Linktree</span> (in bio)!
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><strong>What flavors, designs, or themes do you offer?</strong></div>
+      <div class="faq-answer">
+        <span class="bold">Anything and everything!</span> From coquette hearts to techy computer cakes to Disney themes—<span class="bold">you name it, I cake it.</span> I love getting creative!
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><strong>How far in advance should I order? Are last-minute orders okay?</strong></div>
+      <div class="faq-answer">
+        <span class="bold">1–2 weeks' notice</span> is preferred, but I totally understand that life gets busy! If you need something sooner, just reach out—<span class="bold">I'll do my best to make it happen.</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><strong>How much can I order?</strong></div>
+      <div class="faq-answer">
+        I'm open to <span class="bold">larger orders!</span> Just keep in mind that I'm a full-time college student, so availability may vary. <span class="bold">Message me in advance</span> and we can figure it out together!
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><strong>Do you require a deposit?</strong></div>
+      <div class="faq-answer">
+        Yes, a <span class="bold">$5 deposit</span> is needed to secure your order. The rest is due at pickup.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><strong>What forms of payment do you accept?</strong></div>
+      <div class="faq-answer">
+        <span class="bold">Venmo, Zelle, Apple Pay, and cash.</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><strong>Are your desserts made from scratch?</strong></div>
+      <div class="faq-answer">
+        <span class="bold">Absolutely!</span> Every treat is handmade from scratch using carefully selected ingredients. Please let me know about any allergies or dietary needs - <span class="bold">I will do my best to accommodate.</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><strong>What if I need to cancel or change something?</strong></div>
+      <div class="faq-answer">
+        No worries - things come up! Just let me know as soon as you can.<br>
+        • <span class="bold">Cancellations:</span> Please cancel at least 24 hours before pickup.<br>
+        • <span class="bold">Changes:</span> Flavor, design, size - whatever it is, message me and I'll adjust!
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><strong>Do you offer delivery?</strong></div>
+      <div class="faq-answer">
+        Not at the moment - <span class="bold">pickup only.</span> I'm conveniently located near campus at <span class="bold">Union on San Antonio.</span>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><strong>Where and how do I pick up my order?</strong></div>
+      <div class="faq-answer">
+        Pickups happen at my apartment in <span class="bold">Union on San Antonio.</span> We'll schedule a pickup window, and I'll send you the exact room number the day of.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><strong>What if I'm late to pickup?</strong></div>
+      <div class="faq-answer">
+        <span class="bold">No stress!</span> Just communicate with me - I'll keep your cake safe until you arrive.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><strong>Can someone else pick up my order?</strong></div>
+      <div class="faq-answer">
+        <span class="bold">Of course!</span> Just have them let me know the name the order is under at the door.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><strong>How long will my cake stay fresh?</strong></div>
+      <div class="faq-answer">
+        Keep your cake <span class="bold">refrigerated</span> and you can enjoy it for the next <span class="bold">3-5 days!</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox for zoomable images -->
+<div id="lightbox" class="lightbox">
+  <div class="lightbox-content">
+    <img id="lightboxImage" class="lightbox-image" src="" alt="">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <button class="lightbox-nav lightbox-prev" onclick="navigateGallery(-1)" style="display: none;">&#8249;</button>
+    <button class="lightbox-nav lightbox-next" onclick="navigateGallery(1)" style="display: none;">&#8250;</button>
+    <div class="lightbox-counter" id="lightboxCounter" style="display: none;"></div>
+    <div class="lightbox-caption" id="lightboxCaption" style="display: none;"></div>
+  </div>
+</div>
+
+<!-- Socials Section -->
+<section id="socials">
+  <div class="socials-container">
+    <h2 class="socials-title"> </h2>
+    
+    <div class="social-platform">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="social-logo">
+      <div class="social-handle">
+        <a href="https://www.instagram.com/CAKED_by_Abi/" target="_blank">@CAKED_by_Abi</a>
+      </div>
+      <a href="https://www.instagram.com/CAKED_by_Abi/" target="_blank" class="follow-button">Follow</a>
+    </div>
+
+    <div class="social-platform">
+      <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok" class="social-logo">
+      <div class="social-handle">
+        <a href="https://www.tiktok.com/@bakingwithabi" target="_blank">@bakingwithabi</a>
+      </div>
+      <a href="https://www.tiktok.com/@bakingwithabi" target="_blank" class="follow-button">Follow</a>
+    </div>
+
+    <div class="social-platform">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="social-logo">
+      <div class="social-handle">
+        <a href="https://www.facebook.com/profile.php?id=61578423906146&sk=about_details" target="_blank">CAKED by Abi</a>
+      </div>
+      <a href="https://www.facebook.com/profile.php?id=61578423906146&sk=about_details" target="_blank" class="follow-button">Follow</a>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery">
+  <div class="gallery-container">
+    <h2 class="gallery-title"> </h2>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Gallery items will be populated by JavaScript -->
+    </div>
+  </div>
+</section>
+
+<script>
+// Enhanced Lightbox functionality
+let currentGalleryIndex = 0;
+let isGalleryMode = false;
+
+function openLightbox(imageSrc, altText) {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const prevBtn = document.querySelector('.lightbox-prev');
+  const nextBtn = document.querySelector('.lightbox-next');
+  const counter = document.getElementById('lightboxCounter');
+  const caption = document.getElementById('lightboxCaption');
+  
+  lightboxImage.src = imageSrc;
+  lightboxImage.alt = altText;
+  
+  // Hide navigation for order blobs
+  prevBtn.style.display = 'none';
+  nextBtn.style.display = 'none';
+  counter.style.display = 'none';
+  caption.style.display = 'none';
+  isGalleryMode = false;
+  
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function openGalleryLightbox(index) {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const prevBtn = document.querySelector('.lightbox-prev');
+  const nextBtn = document.querySelector('.lightbox-next');
+  const counter = document.getElementById('lightboxCounter');
+  const caption = document.getElementById('lightboxCaption');
+  
+  currentGalleryIndex = index;
+  isGalleryMode = true;
+  
+  // Show navigation for gallery
+  prevBtn.style.display = 'flex';
+  nextBtn.style.display = 'flex';
+  counter.style.display = 'block';
+  caption.style.display = 'block';
+  
+  updateGalleryImage();
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function updateGalleryImage() {
+  const lightboxImage = document.getElementById('lightboxImage');
+  const counter = document.getElementById('lightboxCounter');
+  const caption = document.getElementById('lightboxCaption');
+  const item = galleryData[currentGalleryIndex];
+  
+  lightboxImage.src = item.image;
+  lightboxImage.alt = item.caption;
+  counter.textContent = `${currentGalleryIndex + 1} / ${galleryData.length}`;
+  caption.textContent = item.caption;
+}
+
+function navigateGallery(direction) {
+  if (!isGalleryMode) return;
+  
+  currentGalleryIndex += direction;
+  
+  if (currentGalleryIndex >= galleryData.length) {
+    currentGalleryIndex = 0;
+  } else if (currentGalleryIndex < 0) {
+    currentGalleryIndex = galleryData.length - 1;
+  }
+  
+  updateGalleryImage();
+}
+
+function closeLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  lightbox.classList.remove('active');
+  document.body.style.overflow = 'auto';
+  isGalleryMode = false;
+}
+
+// Close lightbox when clicking outside the image
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeLightbox();
+  }
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+  const lightbox = document.getElementById('lightbox');
+  if (lightbox.classList.contains('active')) {
+    if (e.key === 'Escape') {
+      closeLightbox();
+    } else if (isGalleryMode) {
+      if (e.key === 'ArrowLeft') {
+        navigateGallery(-1);
+      } else if (e.key === 'ArrowRight') {
+        navigateGallery(1);
+      }
+    }
+  }
+});
+
+// Function to wrap each letter in a span for animation - but make them invisible
+function wrapLettersInSpans() {
+  const title = document.getElementById('meetAbiTitle');
+  const text = 'Meet Abi';
+  title.innerHTML = '';
+  
+  for (let i = 0; i < text.length; i++) {
+    const span = document.createElement('span');
+    span.classList.add('letter');
+    span.style.visibility = 'hidden'; // Make invisible
+    span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
+    title.appendChild(span);
+  }
+}
+
+// Initialize letter animation when page loads
+document.addEventListener('DOMContentLoaded', wrapLettersInSpans);
+
+// Scroll animation for FAQ answers and policy sections
+function handleScrollAnimations() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  const faqAnswers = document.querySelectorAll('.faq-answer');
+  const policySections = document.querySelectorAll('.policy-section');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Add a small delay for smoother animation
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+  
+  // Observe FAQ items for staggered animation
+  faqItems.forEach((item, index) => {
+    const itemObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+            // Also animate the answer
+            const answer = entry.target.querySelector('.faq-answer');
+            if (answer) {
+              setTimeout(() => {
+                answer.classList.add('visible');
+              }, 200);
+            }
+          }, index * 150); // Stagger by 150ms
+        }
+      });
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    });
+    
+    itemObserver.observe(item);
+  });
+  
+  // Observe policy sections for staggered animation
+  policySections.forEach((section, index) => {
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 200); // Stagger by 200ms
+        }
+      });
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    
+    sectionObserver.observe(section);
+  });
+}
+
+// Initialize scroll animations when page loads
+document.addEventListener('DOMContentLoaded', handleScrollAnimations);
+
+  // Gallery data with image names and captions
+  const galleryData = [
+    { image: 'mermaidcake.jpg', caption: 'Mermaid Core' },
+    { image: 'kaylacake.jpg', caption: 'Classy & Elegant' },
+    { image: 'caked12.jpg', caption: 'Vintage Heart' },
+    { image: 'felizcake.jpg', caption: 'Dreamy Blues' },
+    { image: 'racetrackcake.jpg', caption: 'Race Track' },
+    { image: 'fairycake.jpeg', caption: 'Enchanted Fairy' },
+    { image: 'dualcake.jpeg', caption: 'Duality' },
+    { image: 'computercake.jpeg', caption: 'Tech-Savvy' },
+    { image: 'caked6.jpg', caption: 'By the Shore' },
+    { image: 'coquettebites.jpg', caption: 'Coquette Bites' },
+    { image: 'strawberrybouquet.jpg', caption: 'Strawberry Bouquet' },
+    { image: 'coquettesticks.jpg', caption: 'Coquette Sticks' },
+    { image: 'caked7.jpg', caption: 'Raspberry Macaron' },
+    { image: 'seashellmacaron.jpg', caption: 'Seashell Macaron' },
+    { image: 'caked11.jpg', caption: 'Mermaid Sticks' },
+    { image: 'caked5.jpg', caption: 'Cozy Polar Bear' },
+    { image: 'caked8.jpg', caption: 'Brownie Bears' },
+    { image: 'cocoabearpop2.jpg', caption: 'Cocoa Bear Pop' },
+    { image: 'smorepop.jpg', caption: 'Smore Pop' },
+    { image: 'smorepop2.jpg', caption: 'Smore Pop' },
+    { image: 'pumpkinpop.jpg', caption: 'Pumpking Patch' },
+    { image: 'caked4.jpg', caption: 'Matcha Frogs' },
+    { image: 'pinkpop.jpg', caption: 'Pink & Sparkly Pop' },
+    { image: 'heartcakepop.jpg', caption: 'Valentine Heart Pop' },
+    { image: 'caked14.jpg', caption: 'Berry Tart' },
+  ];
+
+  // Create gallery items
+  const galleryGrid = document.getElementById('galleryGrid');
+  
+  galleryData.forEach((item, index) => {
+    const galleryItem = document.createElement('div');
+    galleryItem.classList.add('gallery-item');
+    galleryItem.addEventListener('click', () => openGalleryLightbox(index));
+    
+    galleryItem.innerHTML = `
+      <img src="${item.image}" alt="${item.caption}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div style="display: none; align-items: center; justify-content: center; height: 100%; color: #d97d8f; font-size: 0.9rem; text-align: center;">
+        ${item.caption}
+      </div>
+      <div class="gallery-caption">${item.caption}</div>
+    `;
+    
+    galleryGrid.appendChild(galleryItem);
+  });
+</script>
+
+</body>
+</html>
