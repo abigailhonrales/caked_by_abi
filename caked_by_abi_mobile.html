@@ -2601,36 +2601,35 @@ function handleScrollAnimations() {
 document.addEventListener('DOMContentLoaded', handleScrollAnimations);
 
 // Gallery data with image names and captions
-const galleryData = [
+ const galleryData = [
     { image: 'images/greendino.jpg', caption: 'Green Dino' },
     { image: 'images/dinobites.jpg', caption: 'Dino Bites' },
-    { image: 'mermaidcake.jpg', caption: 'Mermaid Core' },
-    { image: 'kaylacake.jpg', caption: 'Classy & Elegant' },
-    { image: 'moanacake.jpg', caption: 'Moana Island' },
-    { image: 'caked12.jpg', caption: 'Vintage Heart' },
-    { image: 'felizcake.jpg', caption: 'Dreamy Blues' },
-    { image: 'racetrackcake.jpg', caption: 'Race Track' },
-    { image: 'fairycake.jpeg', caption: 'Enchanted Fairy' },
-    { image: 'dualcake.jpeg', caption: 'Duality' },
-    { image: 'computercake.jpeg', caption: 'Tech-Savvy' },
-    { image: 'caked6.jpg', caption: 'By the Shore' },
-    { image: 'coquettebites.jpg', caption: 'Coquette Bites' },
-    { image: 'strawberrybouquet.jpg', caption: 'Strawberry Bouquet' },
-    { image: 'coquettesticks.jpg', caption: 'Coquette Sticks' },
-    { image: 'caked7.jpg', caption: 'Raspberry Macaron' },
-    { image: 'seashellmacaron.jpg', caption: 'Seashell Macaron' },
-    { image: 'caked11.jpg', caption: 'Mermaid Sticks' },
-    { image: 'caked5.JPG', caption: 'Winter Bears' },
-    { image: 'caked8.jpg', caption: 'Brownie Bears' },
-    { image: 'cocoabearpop2.jpg', caption: 'Cocoa Bear Pop' },
-    { image: 'smorepop.jpg', caption: 'Smore Pop' },
-    { image: 'smorepop2.jpg', caption: 'Smore Pop' },
-    { image: 'pumpkinpop.jpg', caption: 'Pumpking Patch' },
-    { image: 'caked4.jpg', caption: 'Matcha Frogs' },
-    { image: 'pinkpop.jpg', caption: 'Pink & Sparkly Pop' },
-    { image: 'heartcakepop.jpg', caption: 'Valentine Heart Pop' },
-    { image: 'caked14.jpg', caption: 'Berry Tart' }
-];
+    { image: 'images/mermaidcake.jpg', caption: 'Mermaid Core' },
+    { image: 'images/kaylacake.jpg', caption: 'Classy & Elegant' },
+    { image: 'images/caked12.JPG', caption: 'Vintage Heart' },
+    { image: 'images/felizcake.jpg', caption: 'Dreamy Blues' },
+    { image: 'images/racetrackcake.jpg', caption: 'Race Track' },
+    { image: 'images/fairycake.jpeg', caption: 'Enchanted Fairy' },
+    { image: 'images/dualcake.jpeg', caption: 'Duality' },
+    { image: 'images/computercake.jpeg', caption: 'Tech-Savvy' },
+    { image: 'images/caked6.JPG', caption: 'By the Shore' },
+    { image: 'images/coquettebites.jpg', caption: 'Coquette Bites' },
+    { image: 'images/strawberrybouquet.jpg', caption: 'Strawberry Bouquet' },
+    { image: 'images/coquettesticks.jpg', caption: 'Coquette Sticks' },
+    { image: 'images/caked7.JPG', caption: 'Raspberry Macaron' },
+    { image: 'images/seashellmacaron.jpg', caption: 'Seashell Macaron' },
+    { image: 'images/caked11.JPG', caption: 'Mermaid Sticks' },
+    { image: 'images/caked5.JPG', caption: 'Cozy Polar Bear' },
+    { image: 'images/caked8.JPG', caption: 'Brownie Bears' },
+    { image: 'images/cocoabearpop2.jpg', caption: 'Cocoa Bear Pop' },
+    { image: 'images/smorepop.jpg', caption: 'Smore Pop' },
+    { image: 'images/smorepop2.jpg', caption: 'Smore Pop' },
+    { image: 'images/pumpkinpop.jpg', caption: 'Pumpking Patch' },
+    { image: 'images/caked4.jpg', caption: 'Matcha Frogs' },
+    { image: 'images/pinkpop.jpg', caption: 'Pink & Sparkly Pop' },
+    { image: 'images/heartcakepop.JPG', caption: 'Valentine Heart Pop' },
+    { image: 'images/caked14.JPG', caption: 'Berry Tart' },
+  ];
 
 let currentImageIndex = 0;
 
