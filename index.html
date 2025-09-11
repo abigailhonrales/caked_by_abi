@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      if (window.innerWidth <= 768) {
-        window.location.href = "caked_by_abi_mobile.html";
+    function isMobile() {
+      return (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
+          .test(navigator.userAgent) ||
+        window.matchMedia("(max-width: 768px)").matches
+      );
+    }
+
+    window.addEventListener("load", function () {
+      if (isMobile()) {
+        window.location.replace("caked_by_abi_mobile.html");
       } else {
-        window.location.href = "caked_by_abi_mobile.html";
+        window.location.replace("caked_by_abi.html");
       }
     });
   </script>
 </head>
 <body>
-  <p>Loading...</p>
+  <p>Redirecting you to the best version for your device...</p>
 </body>
 </html>
